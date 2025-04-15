@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Surprising Gift</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  </head>
+
+  <body id="body">
+    <div id="cover">
+      <button id="light_btn">Please turn on the light 💡</button>
+      <button id="music_btn">Please Click Here</button>
+    </div>
+
+    <div id="main">
+      <h1>This is to appreciate your efforts. 😊</h1>
+      <img src="img/Hussain's_pic.jpg" alt="user's image" class="profile-pic" />
+      <h3>Mr. Hussain Hussaini</h3>
+      <h2>Please click the gift box to open your gift. 😍</h2>
+      <img src="img/gift3.png" alt="gift image" id="gift_box" />
+      <img src="img/medal.png" alt="gift image" id="gift" />
+      <div id="message">You are amazing! 🎉</div>
+    </div>
+
+    <audio id="chime" src="https://cdn.pixabay.com/audio/2022/03/15/audio_baddd7b008.mp3"></audio>
+    <audio id="bg_music" src="https://cdn.pixabay.com/audio/2023/03/02/audio_cbd4243189.mp3" loop></audio>
+
+    <script>
+      const music_btn = document.getElementById("music_btn");
+      const main_div = document.getElementById("main");
+      const cover_div = document.getElementById("cover");
+      const gift_box = document.getElementById("gift_box");
+      const gift = document.getElementById("gift");
+      const chime = document.getElementById("chime");
+      const bgMusic = document.getElementById("bg_music");
+      const message = document.getElementById("message");
+
+      document.addEventListener("DOMContentLoaded", () => {
+        music_btn.style.display = "none";
+        main_div.style.display = "none";
+        gift.style.display = "none";
+        message.style.display = "none";
+      });
+
+      let btn = document.getElementById("light_btn");
+      let body = document.getElementById("body");
+      const path = ["url(img/light1.jpg)"];
+
+      btn.addEventListener("click", function () {
+        body.style.backgroundImage = path[0];
+        music_btn.style.display = "block";
+        btn.remove();
+      });
+
+      music_btn.addEventListener("click", function () {
+        main_div.style.display = "flex";
+        cover_div.remove();
+        bgMusic.play();
+      });
+
+      gift_box.addEventListener("click", function () {
+        gift_box.style.display = "none";
+        gift.style.display = "block";
+        chime.play();
+        message.style.display = "block";
+
+        confetti({
+          particleCount: 200,
+          spread: 100,
+          origin: { y: 0.6 }
+        });
+      });
+
+      gift.addEventListener("click", function () {
+        gift.style.display = "none";
+        gift_box.style.display = "block";
+        message.style.display = "none";
+      });
+    </script>
+  </body>
+</html>
